@@ -7,10 +7,11 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint assets/index.js",
-    "start": "webpack-dev-server --inline -d --progress --colors"
+    "start": "webpack-dev-server --inline -d --progress --colors",
+    "build": "webpack -p"
   },
   "dependencies": {
-    "d3": "^4.9.1"
+    "three": "^0.85.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
