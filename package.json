@@ -1,0 +1,26 @@
+{
+  "name": "sf",
+  "version": "1.0.0",
+  "description": "shiftfoc.us",
+  "repository": "git@github.com:dzhurley/sf.git",
+  "author": "Derek Hurley <dzhurley@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint assets/index.js",
+    "start": "webpack-dev-server --inline -d --progress --colors"
+  },
+  "dependencies": {
+    "d3": "^4.9.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.2",
+    "eslint": "^3.19.0",
+    "eslint-config-dzhurley": "^1.0.2",
+    "eslint-loader": "^1.7.1",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
