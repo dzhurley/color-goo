@@ -11,7 +11,8 @@
     "build": "webpack -p"
   },
   "dependencies": {
-    "three": "^0.85.2"
+    "three": "^0.85.2",
+    "tween.js": "^16.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
