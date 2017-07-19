@@ -15,8 +15,17 @@ camera.position.z = 200;
 
 export const scene = new THREE.Scene();
 
-[[200, 200, 200], [-200, 200, -200], [0, 0, 200]].forEach(pos => {
+export const lights = {
+    object: new THREE.Group(),
+    animate() {
+        this.object.rotation.x += 0.005;
+        this.object.rotation.y += 0.005;
+        this.object.rotation.z += 0.005;
+    }
+};
+[[1000, 0, 0], [-1000, 0, 0], [0, 1000, 0], [0, -1000, 0], [0, 0, 1000], [0, 0, -1000]].forEach(pos => {
     let light = new THREE.PointLight();
     light.position.set(...pos);
-    scene.add(light);
+    lights.object.add(light);
 });
+scene.add(lights.object);

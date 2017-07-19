@@ -1,6 +1,6 @@
 import TWEEN from 'tween.js';
 
-import { camera, renderer, scene } from './three';
+import { camera, lights, renderer, scene } from './three';
 
 import { onIntersect } from './events';
 
@@ -20,6 +20,7 @@ const animate = () => {
     music.animate();
     code.animate();
 
+    lights.animate();
     TWEEN.update();
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
