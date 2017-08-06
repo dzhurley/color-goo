@@ -1,27 +1,16 @@
-import TWEEN from 'tween.js';
+import * as THREE from 'three';
 
-import { camera, lights, renderer, scene } from './three';
+import { camera, renderer, scene } from './three';
 
-import { onIntersect } from './events';
+import './me';
+import cubes from './cubes';
 
-import me from './me';
-import photos from './photos';
-import music from './music';
-import code from './code';
-
-onIntersect(me.object, 'click', () => [photos, music, code].forEach(({ object }) => {
-    new TWEEN.Tween(object.scale).to({ x: 1, y: 1, z: 1 }, 500).start();
-    new TWEEN.Tween(object.position).to(object.userData.endPosition, 500).start();
-}));
+const clock = new THREE.Clock();
+let time = 0;
 
 const animate = () => {
-    me.animate();
-    photos.animate();
-    music.animate();
-    code.animate();
-
-    lights.animate();
-    TWEEN.update();
+    time += clock.getDelta() * 0.5;
+    cubes.animate(time);
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
 };

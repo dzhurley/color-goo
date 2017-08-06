@@ -1,31 +1,28 @@
 import * as THREE from 'three';
+import 'three-examples/controls/OrbitControls';
 
 export const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;
+renderer.gammaInput = true;
+renderer.gammaOutput = true;
 document.body.appendChild(renderer.domElement);
 
-export const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 100, 9000);
+export const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
 window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 });
-camera.position.z = 200;
+camera.position.set(-500, 500, 500);
+
+export const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 export const scene = new THREE.Scene();
 
-export const lights = {
-    object: new THREE.Group(),
-    animate() {
-        this.object.rotation.x += 0.005;
-        this.object.rotation.y += 0.005;
-        this.object.rotation.z += 0.005;
-    }
-};
-[[1000, 0, 0], [-1000, 0, 0], [0, 1000, 0], [0, -1000, 0], [0, 0, 1000], [0, 0, -1000]].forEach(pos => {
-    let light = new THREE.PointLight();
-    light.position.set(...pos);
-    lights.object.add(light);
-});
-scene.add(lights.object);
+const light = new THREE.DirectionalLight(0xffffff);
+light.position.set(0.5, 0.5, 1);
+const pointLight = new THREE.PointLight(0xff3300);
+pointLight.position.set(0, 0, 100);
+const ambientLight = new THREE.AmbientLight(0x080808);
+
+scene.add(ambientLight, pointLight, light);

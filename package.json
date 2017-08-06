@@ -11,6 +11,7 @@
     "build": "webpack -p"
   },
   "dependencies": {
+    "imports-loader": "^0.7.1",
     "three": "^0.85.2",
     "tween.js": "^16.6.0"
   },
