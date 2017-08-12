@@ -18,11 +18,3 @@ camera.position.set(-500, 500, 500);
 export const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 export const scene = new THREE.Scene();
-
-const light = new THREE.DirectionalLight(0xffffff);
-light.position.set(0.5, 0.5, 1);
-const pointLight = new THREE.PointLight(0xff3300);
-pointLight.position.set(0, 0, 100);
-const ambientLight = new THREE.AmbientLight(0x080808);
-
-scene.add(ambientLight, pointLight, light);

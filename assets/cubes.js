@@ -5,25 +5,25 @@ import { scene } from './three';
 
 const photos = new THREE.Mesh(
     new THREE.BoxBufferGeometry(1, 1, 200),
-    new THREE.MeshPhongMaterial({ color: 0xFF0000 })
+    new THREE.MeshNormalMaterial()
 );
 photos.name = 'photos';
 
 const music = new THREE.Mesh(
     new THREE.BoxBufferGeometry(1, 1, 200),
-    new THREE.MeshPhongMaterial({ color: 0x00FF00 })
+    new THREE.MeshNormalMaterial()
 );
 music.name = 'music';
 
 const code = new THREE.Mesh(
     new THREE.BoxBufferGeometry(1, 1, 200),
-    new THREE.MeshPhongMaterial({ color: 0x0000FF })
+    new THREE.MeshNormalMaterial()
 );
 code.name = 'code';
 
 scene.add(photos, music, code);
 
-const marchMaterial = new THREE.MeshPhongMaterial({ color: 0x000000, specular: 0xFFFFFF, shininess: 1 });
+const marchMaterial = new THREE.MeshNormalMaterial();
 const march = new THREE.MarchingCubes(28, marchMaterial, true, true);
 march.name = 'march';
 march.position.set(0, 0, 0);
@@ -41,11 +41,7 @@ export default {
             const ballz = Math.cos(i + 1.32 * time * 0.1 * Math.sin((0.92 + 0.53 * i))) * 0.27 + 0.5;
 
             march.addBall(ballx, bally, ballz, strength, 12);
-            [photos, music, code][i].position.set(
-                ballx * 200,
-                bally * 200,
-                ballz * 200,
-            );
+            [photos, music, code][i].position.set(ballx, bally, ballz);
         }
     }
 };
