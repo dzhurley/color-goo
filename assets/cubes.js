@@ -3,22 +3,13 @@ import 'three-examples/MarchingCubes';
 
 import { scene } from './three';
 
-const photos = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(1, 1, 200),
-    new THREE.MeshNormalMaterial()
-);
+const photos = new THREE.AxisHelper(100);
 photos.name = 'photos';
 
-const music = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(1, 1, 200),
-    new THREE.MeshNormalMaterial()
-);
+const music = new THREE.AxisHelper(100);
 music.name = 'music';
 
-const code = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(1, 1, 200),
-    new THREE.MeshNormalMaterial()
-);
+const code = new THREE.AxisHelper(100);
 code.name = 'code';
 
 scene.add(photos, music, code);
@@ -42,6 +33,7 @@ export default {
 
             march.addBall(ballx, bally, ballz, strength, 12);
             [photos, music, code][i].position.set(ballx, bally, ballz);
+            [photos, music, code][i].position.multiplyScalar(100);
         }
     }
 };
