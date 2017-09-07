@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import 'three-examples/MarchingCubes';
+import './forks/MarchingCubes';
 
 import { scene } from './three';
 
@@ -21,6 +21,8 @@ march.position.set(0, 0, 0);
 march.scale.set(200, 200, 200);
 scene.add(march);
 
+scene.add(new THREE.AxisHelper(300));
+
 export default {
     object: march,
     animate: time => {
@@ -31,9 +33,9 @@ export default {
             const bally = Math.abs(Math.cos(i + 1.12 * time * Math.cos(1.22 + 0.1424 * i))) * 0.77;
             const ballz = Math.cos(i + 1.32 * time * 0.1 * Math.sin((0.92 + 0.53 * i))) * 0.27 + 0.5;
 
-            march.addBall(ballx, bally, ballz, strength, 12);
-            [photos, music, code][i].position.set(ballx, bally, ballz);
-            [photos, music, code][i].position.multiplyScalar(100);
+            const { x, y, z } = march.addBall(ballx, bally, ballz, strength, 2);
+            [photos, music, code][i].position.set(x, y, z);
+            [photos, music, code][i].position.multiplyScalar(200);
         }
     }
 };

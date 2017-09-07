@@ -13,8 +13,12 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: [/node_modules/, /forks/],
                 loaders: ['babel-loader', 'eslint-loader']
+            },
+            {
+                test: /forks/,
+                use: 'imports-loader?THREE=three'
             },
             {
                 test: /three\/examples\/js/,
