@@ -13,7 +13,7 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 });
-camera.position.set(-500, 500, 500);
+camera.position.set(500, 0, 500);
 
 export const controls = new THREE.OrbitControls(camera, renderer.domElement);
 

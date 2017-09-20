@@ -512,9 +512,9 @@ THREE.MarchingCubes = function ( resolution, material, enableUvs, enableColors )
                     if ( val > 0.0 ) {
                         this.field[ y_offset + x ] += val * sign;
 
-                        if ( x === 13 ) ret_x = (-fx * 2) - 0.1;
-                        if ( y === 13 ) ret_y = (-fy * 2) - 0.1;
-                        if ( z === 13 ) ret_z = (-fz * 2) - 0.1;
+                        if ( x === Math.floor(this.resolution / 2) ) ret_x = (-fx * 2) - 0.1;
+                        if ( y === Math.floor(this.resolution / 2) ) ret_y = (-fy * 2) - 0.1;
+                        if ( z === Math.floor(this.resolution / 2) ) ret_z = (-fz * 2) - 0.1;
                     }
 
 				}
