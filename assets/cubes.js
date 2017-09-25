@@ -3,19 +3,22 @@ import './forks/MarchingCubes';
 
 import { scene } from './three';
 
-const photos = new THREE.AxisHelper(100);
+const ballGeo = new THREE.OctahedronBufferGeometry(42, 3);
+const ballMat = new THREE.MeshBasicMaterial();
+
+const photos = new THREE.Mesh(ballGeo, ballMat);
 photos.name = 'photos';
 
-const music = new THREE.AxisHelper(100);
+const music = new THREE.Mesh(ballGeo, ballMat);
 music.name = 'music';
 
-const code = new THREE.AxisHelper(100);
+const code = new THREE.Mesh(ballGeo, ballMat);
 code.name = 'code';
 
 scene.add(photos, music, code);
 
 const marchMaterial = new THREE.MeshNormalMaterial();
-const march = new THREE.MarchingCubes(20, marchMaterial, true, true);
+const march = new THREE.MarchingCubes(42, marchMaterial, true, true);
 march.name = 'march';
 march.position.set(0, 0, 0);
 march.scale.set(200, 200, 200);
