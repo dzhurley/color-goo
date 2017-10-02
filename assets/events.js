@@ -11,5 +11,7 @@ const hoverCursor = ({ clientX, clientY }) => {
     raycaster.setFromCamera(mouse, camera);
     const hits = raycaster.intersectObjects(scene.children);
     document.querySelector('canvas').style.cursor = hits.length ? 'pointer' : '';
+    // eslint-disable-next-line
+    hits[0] && console.log(`hit: ${hits[0].object.name}`);
 };
 window.addEventListener('mousemove', hoverCursor, false);

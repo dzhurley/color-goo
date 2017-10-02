@@ -6,5 +6,6 @@ const me = new THREE.Mesh(
     new THREE.BoxBufferGeometry(50, 50, 50),
     new THREE.MeshNormalMaterial()
 );
+me.name = 'me';
 
 scene.add(me);

@@ -6,11 +6,12 @@
   "author": "Derek Hurley <dzhurley@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint assets/index.js",
+    "lint": "eslint assets/*.js",
     "start": "webpack-dev-server --inline -d --progress --colors",
     "build": "webpack -p"
   },
   "dependencies": {
+    "dat.gui": "dataarts/dat.gui",
     "imports-loader": "^0.7.1",
     "three": "^0.85.2",
     "tween.js": "^16.6.0"
