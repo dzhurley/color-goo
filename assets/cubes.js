@@ -18,6 +18,13 @@ code.name = 'code';
 
 scene.add(photos, music, code);
 
+const wires = new THREE.Mesh(
+    new THREE.BoxBufferGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({ wireframe: true }),
+);
+wires.scale.set(params.scale, params.scale, params.scale);
+scene.add(wires);
+
 const marchMaterial = new THREE.MeshNormalMaterial();
 const march = new THREE.MarchingCubes(params.resolution, marchMaterial, true, true);
 march.name = 'march';
@@ -33,6 +40,7 @@ export default {
         march.init(params.resolution);
         march.isolation = params.isolation;
 
+        wires.scale.set(params.scale, params.scale, params.scale);
         const speed = time * params.speed;
 
         march.reset();

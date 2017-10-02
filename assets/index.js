@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import { camera, renderer, scene } from './three';
 import './events';
 
-import './me';
 import cubes from './cubes';
 
 const clock = new THREE.Clock();
