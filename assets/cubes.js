@@ -5,25 +5,26 @@ import { scene } from './three';
 import params from './gui';
 
 const ballGeo = new THREE.OctahedronBufferGeometry(42, 3);
-const ballMat = new THREE.MeshBasicMaterial();
 
-const photos = new THREE.Mesh(ballGeo, ballMat);
+const photos = new THREE.Mesh(
+    ballGeo,
+    new THREE.MeshBasicMaterial({ color: 0xff0000 }),
+);
 photos.name = 'photos';
 
-const music = new THREE.Mesh(ballGeo, ballMat);
+const music = new THREE.Mesh(
+    ballGeo,
+    new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
+);
 music.name = 'music';
 
-const code = new THREE.Mesh(ballGeo, ballMat);
+const code = new THREE.Mesh(
+    ballGeo,
+    new THREE.MeshBasicMaterial({ color: 0x0000ff }),
+);
 code.name = 'code';
 
 scene.add(photos, music, code);
-
-const wires = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ wireframe: true }),
-);
-wires.scale.set(params.scale, params.scale, params.scale);
-scene.add(wires);
 
 const marchMaterial = new THREE.MeshNormalMaterial();
 const march = new THREE.MarchingCubes(params.resolution, marchMaterial, true, true);
@@ -33,6 +34,7 @@ march.scale.set(200, 200, 200);
 scene.add(march);
 
 const strength = 1.2 / ((Math.sqrt(3) - 1) / 4 + 1);
+let ballx, bally, ballz;
 
 export default {
     object: march,
@@ -40,14 +42,13 @@ export default {
         march.init(params.resolution);
         march.isolation = params.isolation;
 
-        wires.scale.set(params.scale, params.scale, params.scale);
         const speed = time * params.speed;
 
         march.reset();
         for (let i = 0; i < 3; i++) {
-            const ballx = Math.sin(i + 1.26 * speed * (1.03 + 0.5 * Math.cos(0.21 * i))) * 0.27 + 0.5;
-            const bally = Math.abs(Math.cos(i + 1.12 * speed * Math.cos(1.22 + 0.1424 * i))) * 0.57 + 0.2;
-            const ballz = Math.cos(i + 1.32 * speed * 0.1 * Math.sin((0.92 + 0.53 * i))) * 0.27 + 0.5;
+            ballx = Math.sin(i + speed * Math.cos(1 + i)) * params.bounds + 0.5;
+            bally = Math.cos(i + speed * Math.sin(1 + i)) * params.bounds + 0.5;
+            ballz = Math.cos(i + speed * Math.cos(1 + i)) * params.bounds + 0.5;
 
             const { x, y, z } = march.addBall(ballx, bally, ballz, strength, 2);
             [photos, music, code][i].position.set(x, y, z);
