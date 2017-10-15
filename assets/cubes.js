@@ -5,29 +5,28 @@ import { scene } from './three';
 import params from './gui';
 
 const ballGeo = new THREE.OctahedronBufferGeometry(42, 3);
+const ballMat = new THREE.MeshBasicMaterial();
 
-const photos = new THREE.Mesh(
-    ballGeo,
-    new THREE.MeshBasicMaterial({ color: 0xff0000 }),
-);
+const photos = new THREE.Mesh(ballGeo, ballMat);
 photos.name = 'photos';
 
-const music = new THREE.Mesh(
-    ballGeo,
-    new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
-);
+const music = new THREE.Mesh(ballGeo, ballMat);
 music.name = 'music';
 
-const code = new THREE.Mesh(
-    ballGeo,
-    new THREE.MeshBasicMaterial({ color: 0x0000ff }),
-);
+const code = new THREE.Mesh(ballGeo, ballMat);
 code.name = 'code';
 
 scene.add(photos, music, code);
 
-const marchMaterial = new THREE.MeshNormalMaterial();
-const march = new THREE.MarchingCubes(params.resolution, marchMaterial, true, true);
+const center = new THREE.Mesh(
+    new THREE.OctahedronBufferGeometry(20, 0),
+    new THREE.MeshPhongMaterial({ shading: THREE.FlatShading }),
+);
+center.name = 'center';
+scene.add(center);
+
+const marchMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000, shading: THREE.FlatShading });
+const march = new THREE.MarchingCubes(40, marchMaterial, true, true);
 march.name = 'march';
 march.position.set(0, 0, 0);
 march.scale.set(200, 200, 200);
@@ -39,8 +38,9 @@ let ballx, bally, ballz;
 export default {
     object: march,
     animate: time => {
-        march.init(params.resolution);
-        march.isolation = params.isolation;
+        center.rotateX(0.0005);
+        center.rotateY(0.0006);
+        center.rotateZ(0.0007);
 
         const speed = time * params.speed;
 
