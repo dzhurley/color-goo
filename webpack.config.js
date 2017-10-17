@@ -17,6 +17,10 @@ module.exports = {
                 loaders: ['babel-loader', 'eslint-loader']
             },
             {
+                test: /\.glsl$/,
+                loader: 'webpack-glsl-loader'
+            },
+            {
                 test: /forks/,
                 use: 'imports-loader?THREE=three'
             },

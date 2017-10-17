@@ -4,6 +4,9 @@ import './forks/MarchingCubes';
 import { scene } from './three';
 import params from './gui';
 
+import vertexShader from './vertex.glsl';
+import fragmentShader from './fragment.glsl';
+
 const ballGeo = new THREE.OctahedronBufferGeometry(42, 3);
 const ballMat = new THREE.MeshBasicMaterial();
 
@@ -25,7 +28,18 @@ const center = new THREE.Mesh(
 center.name = 'center';
 scene.add(center);
 
-const marchMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000, shading: THREE.FlatShading });
+const uniforms = {
+    uDirLightPos: { value: new THREE.Vector3() },
+    uDirLightColor: { value: new THREE.Color(0xeeeeee) },
+    uAmbientLightColor: { value: new THREE.Color(0x050505) },
+    uBaseColor: { value: new THREE.Color(0xff0000) }
+};
+
+const marchMaterial = new THREE.ShaderMaterial({
+    uniforms,
+    vertexShader,
+    fragmentShader,
+});
 const march = new THREE.MarchingCubes(40, marchMaterial, true, true);
 march.name = 'march';
 march.position.set(0, 0, 0);
