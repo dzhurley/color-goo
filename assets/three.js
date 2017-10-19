@@ -28,4 +28,6 @@ points[0].position.set(0, 200, 0);
 points[1].position.set(100, 200, 100);
 points[2].position.set(-100, -200, -100);
 
-points.map(p => scene.add(p));
+points.map(p => {
+    scene.add(p);
+});

@@ -29,17 +29,11 @@ center.name = 'center';
 scene.add(center);
 
 const uniforms = {
-    uDirLightPos: { value: new THREE.Vector3() },
-    uDirLightColor: { value: new THREE.Color(0xeeeeee) },
-    uAmbientLightColor: { value: new THREE.Color(0x050505) },
-    uBaseColor: { value: new THREE.Color(0xff0000) }
+    uPhotosPosition: { value: photos.position },
+    uMusicPosition: { value: music.position },
+    uCodePosition: { value: code.position },
 };
-
-const marchMaterial = new THREE.ShaderMaterial({
-    uniforms,
-    vertexShader,
-    fragmentShader,
-});
+const marchMaterial = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
 const march = new THREE.MarchingCubes(40, marchMaterial, true, true);
 march.name = 'march';
 march.position.set(0, 0, 0);

@@ -1,34 +1,30 @@
-uniform vec3 uBaseColor;
-
-uniform vec3 uDirLightPos;
-uniform vec3 uDirLightColor;
-
-uniform vec3 uAmbientLightColor;
+uniform vec3 uPhotosPosition;
+uniform vec3 uMusicPosition;
+uniform vec3 uCodePosition;
 
 varying vec3 vNormal;
-
-varying vec3 vRefract;
+varying vec3 vPos;
 
 void main() {
+  float distPhotos = distance(vPos, uPhotosPosition);
+  float distMusic = distance(vPos, uMusicPosition);
+  float distCode = distance(vPos, uCodePosition);
 
-  float directionalLightWeighting = max( dot( normalize( vNormal ), uDirLightPos ), 0.0);
-  vec3 lightWeighting = uAmbientLightColor + uDirLightColor * directionalLightWeighting;
-
-  float intensity = smoothstep( - 0.5, 1.0, pow( length(lightWeighting), 20.0 ) );
-  intensity += length(lightWeighting) * 0.2;
-
-  float cameraWeighting = dot( normalize( vNormal ), vRefract );
-  intensity += pow( 1.0 - length( cameraWeighting ), 6.0 );
-  intensity = intensity * 0.2 + 0.3;
-
-  if ( intensity < 0.50 ) {
-
-    gl_FragColor = vec4( 2.0 * intensity * uBaseColor, 1.0 );
-
+  if (distPhotos < distMusic) {
+    if (distPhotos < distCode) {
+      // photos is closest
+      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    } else {
+      // code is closest
+      gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    }
   } else {
-
-    gl_FragColor = vec4( 1.0 - 2.0 * ( 1.0 - intensity ) * ( 1.0 - uBaseColor ), 1.0 );
-
+    if (distMusic < distCode) {
+      // music is closest
+      gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+    } else {
+      // code is closest
+      gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    }
   }
-
 }
