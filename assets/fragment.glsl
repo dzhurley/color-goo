@@ -6,25 +6,10 @@ varying vec3 vNormal;
 varying vec3 vPos;
 
 void main() {
-  float distPhotos = distance(vPos, uPhotosPosition);
-  float distMusic = distance(vPos, uMusicPosition);
-  float distCode = distance(vPos, uCodePosition);
-
-  if (distPhotos < distMusic) {
-    if (distPhotos < distCode) {
-      // photos is closest
-      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-    } else {
-      // code is closest
-      gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-    }
-  } else {
-    if (distMusic < distCode) {
-      // music is closest
-      gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
-    } else {
-      // code is closest
-      gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-    }
-  }
+  gl_FragColor = vec4(
+    smoothstep(0.0, 200.0, distance(vPos, uPhotosPosition)),
+    smoothstep(0.0, 200.0, distance(vPos, uMusicPosition)),
+    smoothstep(0.0, 200.0, distance(vPos, uCodePosition)),
+    1.0
+  );
 }
