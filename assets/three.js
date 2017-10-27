@@ -19,7 +19,7 @@ export const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 export const scene = new THREE.Scene();
 
-const points = [
+export const points = [
     new THREE.PointLight(0xffffff),
     new THREE.PointLight(0xffffff),
     new THREE.PointLight(0xffffff),
@@ -28,6 +28,4 @@ points[0].position.set(0, 200, 0);
 points[1].position.set(100, 200, 100);
 points[2].position.set(-100, -200, -100);
 
-points.map(p => {
-    scene.add(p);
-});
+points.map(p => scene.add(p));

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import './forks/MarchingCubes';
 
-import { scene } from './three';
+import { points, scene } from './three';
 import params from './gui';
 
 import vertexShader from './vertex.glsl';
@@ -29,6 +29,9 @@ center.name = 'center';
 scene.add(center);
 
 const uniforms = {
+    uLightPosition0: { value: points[0].position },
+    uLightPosition1: { value: points[1].position },
+    uLightPosition2: { value: points[2].position },
     uPhotosPosition: { value: photos.position },
     uMusicPosition: { value: music.position },
     uCodePosition: { value: code.position },
