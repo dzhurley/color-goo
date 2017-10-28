@@ -24,8 +24,8 @@ export const points = [
     new THREE.PointLight(0xffffff),
     new THREE.PointLight(0xffffff),
 ];
-points[0].position.set(0, 200, 0);
-points[1].position.set(100, 200, 100);
-points[2].position.set(-100, -200, -100);
+points[0].position.set(-300, 600, -300);
+points[1].position.set(300, 300, 300);
+points[2].position.set(-300, -600, -300);
 
 points.map(p => scene.add(p));
