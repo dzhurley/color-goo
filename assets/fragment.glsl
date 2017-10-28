@@ -35,7 +35,7 @@ void main() {
     smoothstep(0.0, 255.0, distance(worldPos, uCodePosition))
   );
 
-  vec3 normal = normalize(normalInterp);
+  vec3 normal = normalize(cross(dFdx(vertPos), dFdy(vertPos)));
   vec3 l0 = calcLight(lightDir0, diffuseColor, normal);
   vec3 l1 = calcLight(lightDir1, diffuseColor, normal);
   vec3 l2 = calcLight(lightDir2, diffuseColor, normal);

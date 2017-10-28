@@ -36,8 +36,11 @@ const uniforms = {
     uMusicPosition: { value: music.position },
     uCodePosition: { value: code.position },
 };
+
 const marchMaterial = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
-const march = new THREE.MarchingCubes(40, marchMaterial, true, true);
+marchMaterial.derivatives = true;
+
+const march = new THREE.MarchingCubes(params.resolution, marchMaterial, true, true);
 march.name = 'march';
 march.position.set(0, 0, 0);
 march.scale.set(200, 200, 200);
@@ -55,7 +58,10 @@ export default {
 
         const speed = time * params.speed;
 
+        march.init(params.resolution);
+
         march.reset();
+
         for (let i = 0; i < 3; i++) {
             ballx = Math.sin(i + speed * Math.cos(1 + i)) * params.bounds + 0.5;
             bally = Math.cos(i + speed * Math.sin(1 + i)) * params.bounds + 0.5;
