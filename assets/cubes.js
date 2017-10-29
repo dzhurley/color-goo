@@ -42,11 +42,13 @@ marchMaterial.derivatives = true;
 
 const march = new THREE.MarchingCubes(params.resolution, marchMaterial, true, true);
 march.name = 'march';
+march.isolation = 60;
 march.position.set(0, 0, 0);
 march.scale.set(200, 200, 200);
 scene.add(march);
 
 const strength = 1.2 / ((Math.sqrt(3) - 1) / 4 + 1);
+let speed = 0;
 let ballx, bally, ballz;
 
 export default {
@@ -56,7 +58,7 @@ export default {
         center.rotateY(0.0006);
         center.rotateZ(0.0007);
 
-        const speed = time * params.speed;
+        speed += time * params.speed * 0.5;
 
         march.init(params.resolution);
 

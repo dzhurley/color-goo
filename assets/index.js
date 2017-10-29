@@ -7,11 +7,9 @@ import './events';
 import cubes from './cubes';
 
 const clock = new THREE.Clock();
-let time = 0;
 
 const animate = () => {
-    time += clock.getDelta() * 0.5;
-    cubes.animate(time);
+    cubes.animate(clock.getDelta());
     TWEEN.update();
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
