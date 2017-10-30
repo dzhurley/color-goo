@@ -6,7 +6,6 @@ varying vec3 lightDir0;
 varying vec3 lightDir1;
 varying vec3 lightDir2;
 
-varying vec3 normalInterp;
 varying vec3 vertPos;
 varying vec3 worldPos;
 

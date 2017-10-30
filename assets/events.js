@@ -18,16 +18,26 @@ const hoverCursor = ({ clientX, clientY }) => {
 };
 window.addEventListener('mousemove', hoverCursor, false);
 
+
 let exploded = false;
-const push = new TWEEN.Tween(params).easing(TWEEN.Easing.Sinusoidal.InOut).onComplete(() => exploded = true);
-const pull = new TWEEN.Tween(params).easing(TWEEN.Easing.Sinusoidal.InOut).onComplete(() => exploded = false);
-const explode = () => {
+const push = new TWEEN.Tween(params)
+    .easing(TWEEN.Easing.Sinusoidal.InOut)
+    .onComplete(() => exploded = true);
+const pull = new TWEEN.Tween(params)
+    .easing(TWEEN.Easing.Sinusoidal.InOut)
+    .onComplete(() => exploded = false);
+
+const onClick = () => {
     raycaster.setFromCamera(mouse, camera);
     const hits = raycaster.intersectObjects(scene.children);
     if (hits.length) {
-        (exploded && hits[0].object.name === 'center') ?
-            pull.to({ bounds: 0.05 }, params.duration).start() :
+        if (!exploded) {
             push.to({ bounds: 0.25 }, params.duration).start();
+        } else if (hits[0].object.name === 'center') {
+            pull.to({ bounds: 0.05 }, params.duration).start();
+        } else {
+            hits[0].object.userData.clicked = !hits[0].object.userData.clicked;
+        }
     }
 };
-window.addEventListener('click', explode, false);
+window.addEventListener('click', onClick, false);

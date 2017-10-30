@@ -38,7 +38,7 @@ const uniforms = {
 };
 
 const marchMaterial = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
-marchMaterial.derivatives = true;
+marchMaterial.extensions.derivatives = true;
 
 const march = new THREE.MarchingCubes(params.resolution, marchMaterial, true, true);
 march.name = 'march';
@@ -48,8 +48,25 @@ march.scale.set(200, 200, 200);
 scene.add(march);
 
 const strength = 1.2 / ((Math.sqrt(3) - 1) / 4 + 1);
-let speed = 0;
-let ballx, bally, ballz;
+const ballPos = [
+    { x: 0, y: 0, z: 0, speed: 0 },
+    { x: 0, y: 0, z: 0, speed: 0 },
+    { x: 0, y: 0, z: 0, speed: 0 },
+];
+
+const updatePosition = (ball, index, time) => {
+    if (!ball.userData.clicked) {
+        ballPos[index].speed += time * params.speed;
+
+        ballPos[index].x = Math.sin(index + ballPos[index].speed * Math.cos(1 + index)) * params.bounds + 0.5;
+        ballPos[index].y = Math.cos(index + ballPos[index].speed * Math.sin(1 + index)) * params.bounds + 0.5;
+        ballPos[index].z = Math.cos(index + ballPos[index].speed * Math.cos(1 + index)) * params.bounds + 0.5;
+    }
+
+    const { x, y, z } = march.addBall(ballPos[index].x, ballPos[index].y, ballPos[index].z, strength, 2);
+    ball.position.set(x, y, z);
+    ball.position.multiplyScalar(200);
+};
 
 export default {
     object: march,
@@ -58,20 +75,11 @@ export default {
         center.rotateY(0.0006);
         center.rotateZ(0.0007);
 
-        speed += time * params.speed * 0.5;
-
         march.init(params.resolution);
-
         march.reset();
 
-        for (let i = 0; i < 3; i++) {
-            ballx = Math.sin(i + speed * Math.cos(1 + i)) * params.bounds + 0.5;
-            bally = Math.cos(i + speed * Math.sin(1 + i)) * params.bounds + 0.5;
-            ballz = Math.cos(i + speed * Math.cos(1 + i)) * params.bounds + 0.5;
-
-            const { x, y, z } = march.addBall(ballx, bally, ballz, strength, 2);
-            [photos, music, code][i].position.set(x, y, z);
-            [photos, music, code][i].position.multiplyScalar(200);
-        }
+        updatePosition(photos, 0, time);
+        updatePosition(music, 1, time);
+        updatePosition(code, 2, time);
     }
 };
