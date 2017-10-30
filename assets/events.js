@@ -30,14 +30,14 @@ const pull = new TWEEN.Tween(params)
 const onClick = () => {
     raycaster.setFromCamera(mouse, camera);
     const hits = raycaster.intersectObjects(scene.children);
-    if (hits.length) {
-        if (!exploded) {
-            push.to({ bounds: 0.25 }, params.duration).start();
-        } else if (hits[0].object.name === 'center') {
-            pull.to({ bounds: 0.05 }, params.duration).start();
-        } else {
-            hits[0].object.userData.clicked = !hits[0].object.userData.clicked;
-        }
+    if (!hits.length) return;
+
+    if (!exploded) {
+        push.to({ bounds: 0.25 }, params.duration).start();
+    } else if (hits[0].object.name === 'center') {
+        pull.to({ bounds: 0.05 }, params.duration).start();
+    } else {
+        hits[0].object.userData.clicked = !hits[0].object.userData.clicked;
     }
 };
 window.addEventListener('click', onClick, false);

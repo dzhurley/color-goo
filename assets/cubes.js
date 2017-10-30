@@ -3,30 +3,10 @@ import './forks/MarchingCubes';
 
 import { points, scene } from './three';
 import params from './gui';
+import { photos, music, code } from './meshes';
 
 import vertexShader from './vertex.glsl';
 import fragmentShader from './fragment.glsl';
-
-const ballGeo = new THREE.OctahedronBufferGeometry(42, 3);
-const ballMat = new THREE.MeshBasicMaterial();
-
-const photos = new THREE.Mesh(ballGeo, ballMat);
-photos.name = 'photos';
-
-const music = new THREE.Mesh(ballGeo, ballMat);
-music.name = 'music';
-
-const code = new THREE.Mesh(ballGeo, ballMat);
-code.name = 'code';
-
-scene.add(photos, music, code);
-
-const center = new THREE.Mesh(
-    new THREE.OctahedronBufferGeometry(20, 0),
-    new THREE.MeshPhongMaterial({ shading: THREE.FlatShading }),
-);
-center.name = 'center';
-scene.add(center);
 
 const uniforms = {
     uLightPosition0: { value: points[0].position },
@@ -48,22 +28,16 @@ march.scale.set(200, 200, 200);
 scene.add(march);
 
 const strength = 1.2 / ((Math.sqrt(3) - 1) / 4 + 1);
-const ballPos = [
-    { x: 0, y: 0, z: 0, speed: 0 },
-    { x: 0, y: 0, z: 0, speed: 0 },
-    { x: 0, y: 0, z: 0, speed: 0 },
-];
 
 const updatePosition = (ball, index, time) => {
     if (!ball.userData.clicked) {
-        ballPos[index].speed += time * params.speed;
-
-        ballPos[index].x = Math.sin(index + ballPos[index].speed * Math.cos(1 + index)) * params.bounds + 0.5;
-        ballPos[index].y = Math.cos(index + ballPos[index].speed * Math.sin(1 + index)) * params.bounds + 0.5;
-        ballPos[index].z = Math.cos(index + ballPos[index].speed * Math.cos(1 + index)) * params.bounds + 0.5;
+        ball.userData.speed += time * params.speed;
+        ball.userData.x = Math.sin(index + ball.userData.speed * Math.cos(1 + index)) * params.bounds + 0.5;
+        ball.userData.y = Math.cos(index + ball.userData.speed * Math.sin(1 + index)) * params.bounds + 0.5;
+        ball.userData.z = Math.cos(index + ball.userData.speed * Math.cos(1 + index)) * params.bounds + 0.5;
     }
 
-    const { x, y, z } = march.addBall(ballPos[index].x, ballPos[index].y, ballPos[index].z, strength, 2);
+    const { x, y, z } = march.addBall(ball.userData.x, ball.userData.y, ball.userData.z, strength, 2);
     ball.position.set(x, y, z);
     ball.position.multiplyScalar(200);
 };
@@ -71,10 +45,6 @@ const updatePosition = (ball, index, time) => {
 export default {
     object: march,
     animate: time => {
-        center.rotateX(0.0005);
-        center.rotateY(0.0006);
-        center.rotateZ(0.0007);
-
         march.init(params.resolution);
         march.reset();
 

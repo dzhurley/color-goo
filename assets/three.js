@@ -18,6 +18,7 @@ camera.position.set(500, 0, 500);
 export const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 export const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x111111);
 
 export const points = [
     new THREE.PointLight(0xffffff),
