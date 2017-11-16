@@ -28,6 +28,7 @@ march.scale.set(200, 200, 200);
 scene.add(march);
 
 const strength = 1.2 / ((Math.sqrt(3) - 1) / 4 + 1);
+let newPosition = {};
 
 const updatePosition = (ball, index, time) => {
     if (!ball.userData.clicked) {
@@ -37,8 +38,8 @@ const updatePosition = (ball, index, time) => {
         ball.userData.z = Math.cos(index + ball.userData.speed * Math.cos(1 + index)) * params.bounds + 0.5;
     }
 
-    const { x, y, z } = march.addBall(ball.userData.x, ball.userData.y, ball.userData.z, strength, 2);
-    ball.position.set(x, y, z);
+    newPosition = march.addBall(ball.userData.x, ball.userData.y, ball.userData.z, strength, 2);
+    ball.position.set(newPosition.x, newPosition.y, newPosition.z);
     ball.position.multiplyScalar(200);
 };
 

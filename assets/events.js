@@ -4,8 +4,10 @@ import TWEEN from 'tween.js';
 import { camera, scene } from './three';
 import params from './gui';
 
+import { toggleMenu } from './menus';
+
 export const raycaster = new THREE.Raycaster();
-export const mouse = new THREE.Vector2();
+const mouse = new THREE.Vector2();
 
 let intersections = [];
 
@@ -19,7 +21,6 @@ const hoverCursor = ({ clientX, clientY }) => {
     document.querySelector('canvas').style.cursor = intersections.length ? 'pointer' : '';
 };
 window.addEventListener('mousemove', hoverCursor, false);
-
 
 let exploded = false;
 const push = new TWEEN.Tween(params)
@@ -35,11 +36,13 @@ const onClick = () => {
     if (!hits.length) return;
 
     if (!exploded && hits[0].object.name !== 'background') {
-        push.to({ bounds: 0.25 }, params.duration).start();
+        push.to({ bounds: 0.25 }, 2500).start();
     } else if (hits[0].object.name === 'center') {
-        pull.to({ bounds: 0.05 }, params.duration).start();
-    } else {
-        hits[0].object.userData.clicked = !hits[0].object.userData.clicked;
+        pull.to({ bounds: 0.05 }, 2500).start();
+    } else if (hits[0].object.name !== 'background') {
+        const newClicked = !hits[0].object.userData.clicked;
+        toggleMenu(hits[0].object, mouse, newClicked);
+        hits[0].object.userData.clicked = newClicked;
     }
 };
 window.addEventListener('click', onClick, false);
