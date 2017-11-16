@@ -20,7 +20,7 @@ const uniforms = {
 const marchMaterial = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
 marchMaterial.extensions.derivatives = true;
 
-const march = new THREE.MarchingCubes(params.resolution, marchMaterial, true, true);
+const march = new THREE.MarchingCubes(34, marchMaterial, true, true);
 march.name = 'march';
 march.isolation = 60;
 march.position.set(0, 0, 0);
@@ -45,9 +45,7 @@ const updatePosition = (ball, index, time) => {
 export default {
     object: march,
     animate: time => {
-        march.init(params.resolution);
         march.reset();
-
         updatePosition(photos, 0, time);
         updatePosition(music, 1, time);
         updatePosition(code, 2, time);

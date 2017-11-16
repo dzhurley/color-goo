@@ -24,6 +24,7 @@
     "eslint": "^3.19.0",
     "eslint-config-dzhurley": "^1.0.2",
     "eslint-loader": "^1.7.1",
+    "stats.js": "^0.17.0",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",
     "webpack-glsl-loader": "^1.0.1"

@@ -20,17 +20,29 @@ code.userData = { x: 0, y: 0, z: 0, speed: 0 };
 scene.add(photos, music, code);
 
 const centerMesh = new THREE.Mesh(
-    new THREE.OctahedronBufferGeometry(20, 0),
-    new THREE.MeshPhongMaterial({ shading: THREE.FlatShading }),
+    new THREE.TetrahedronBufferGeometry(8, 0),
+    new THREE.MeshBasicMaterial({ shading: THREE.FlatShading }),
 );
 centerMesh.name = 'center';
 
-scene.add(centerMesh);
+const backgroundMesh = new THREE.Mesh(
+    new THREE.IcosahedronBufferGeometry(3000, 3),
+    new THREE.MeshPhongMaterial({
+        color: 0x000000,
+        specular: 0x020202,
+        shininess: 90,
+        shading: THREE.FlatShading,
+        side: THREE.BackSide,
+    }),
+);
+backgroundMesh.name = 'background';
 
-export const center = {
+scene.add(backgroundMesh, centerMesh);
+
+export default {
     animate: () => {
-        centerMesh.rotateX(0.005);
-        centerMesh.rotateY(0.006);
-        centerMesh.rotateZ(0.007);
+        centerMesh.rotation.x += 0.05;
+        centerMesh.rotation.y += 0.04;
+        centerMesh.rotation.z += 0.06;
     }
 };
