@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 import { scene } from './three';
+import { trackMenu } from './menus';
 
 const ballGeo = new THREE.OctahedronBufferGeometry(42, 3);
 const ballMat = new THREE.MeshBasicMaterial();
@@ -44,5 +45,9 @@ export default {
         centerMesh.rotation.x += 0.05;
         centerMesh.rotation.y += 0.04;
         centerMesh.rotation.z += 0.06;
+
+        trackMenu(photos);
+        trackMenu(music);
+        trackMenu(code);
     }
 };

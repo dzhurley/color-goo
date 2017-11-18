@@ -41,7 +41,7 @@ const onClick = () => {
         pull.to({ bounds: 0.05 }, 2500).start();
     } else if (hits[0].object.name !== 'background') {
         const newClicked = !hits[0].object.userData.clicked;
-        toggleMenu(hits[0].object, mouse, newClicked);
+        toggleMenu(hits[0].object, newClicked);
         hits[0].object.userData.clicked = newClicked;
     }
 };
