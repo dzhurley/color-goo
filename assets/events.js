@@ -30,6 +30,8 @@ const pull = new TWEEN.Tween(params)
     .easing(TWEEN.Easing.Sinusoidal.InOut)
     .onComplete(() => exploded = false);
 
+const ballNames = ['photos', 'music', 'code'];
+
 const onClick = () => {
     raycaster.setFromCamera(mouse, camera);
     const hits = raycaster.intersectObjects(scene.children);
@@ -41,6 +43,12 @@ const onClick = () => {
         pull.to({ bounds: 0.05 }, 2500).start();
     } else if (hits[0].object.name !== 'background') {
         const newClicked = !hits[0].object.userData.clicked;
+        scene.children.forEach(c => {
+            if (ballNames.includes(c.name)) {
+                toggleMenu(c, false);
+                c.userData.clicked = false;
+            }
+        });
         toggleMenu(hits[0].object, newClicked);
         hits[0].object.userData.clicked = newClicked;
     }

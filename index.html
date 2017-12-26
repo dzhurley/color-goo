@@ -22,10 +22,17 @@
         position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
+        transform: translate(0, -50%);
+
+        text-align: center;
         padding: 10px;
         background-color: #272727;
         color: #D7D7D7;
         font-family: 'Inconsolata';
+      }
+      .open {
+        display: block;
       }
     </style>
   </head>
@@ -38,9 +45,19 @@
       <a href="https://www.flickr.com/photos/stutterbug42" target="_blank">flickr</a>
       <a href="https://www.last.fm/user/stutterbug42" target="_blank">last.fm</a>
     </section>
-    <section class="photos-menu">photos</section>
-    <section class="music-menu">music</section>
-    <section class="code-menu">code</section>
+
+    <section class="photos-menu">
+      photos
+    </section>
+
+    <section class="music-menu">
+      music
+    </section>
+
+    <section class="code-menu">
+      code
+    </section>
+
     <script src="build/index.js"></script>
   </body>
 </html>
