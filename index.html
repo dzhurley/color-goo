@@ -5,36 +5,7 @@
     <title>shiftfoc.us</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #272727;
-        color: #D7D7D7;
-      }
-      .content {
-        display: none;
-      }
-      .photos-menu,
-      .music-menu,
-      .code-menu {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        transform: translate(0, -50%);
-
-        text-align: center;
-        padding: 10px;
-        background-color: #272727;
-        color: #D7D7D7;
-        font-family: 'Inconsolata';
-      }
-      .open {
-        display: block;
-      }
-    </style>
+    <link rel="stylesheet" href="./assets/index.css">
   </head>
 
   <body>
@@ -46,16 +17,16 @@
       <a href="https://www.last.fm/user/stutterbug42" target="_blank">last.fm</a>
     </section>
 
-    <section class="photos-menu">
-      photos
+    <section class="menu photos">
+      <p>photos and tons of other things that should stay contained in this pop up menu that was just clicked on</p>
     </section>
 
-    <section class="music-menu">
-      music
+    <section class="menu music">
+      <p>music</p>
     </section>
 
-    <section class="code-menu">
-      code
+    <section class="menu code">
+      <p>code</p>
     </section>
 
     <script src="build/index.js"></script>
