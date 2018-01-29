@@ -1,6 +1,6 @@
-uniform vec3 uPhotosPosition;
-uniform vec3 uMusicPosition;
-uniform vec3 uCodePosition;
+uniform vec3 uCyanPosition;
+uniform vec3 uMagentaPosition;
+uniform vec3 uYellowPosition;
 
 varying vec3 lightDir0;
 varying vec3 lightDir1;
@@ -29,9 +29,9 @@ vec3 calcLight(vec3 direction, vec3 diffuseColor, vec3 normal) {
 
 void main() {
   vec3 diffuseColor = vec3(
-    smoothstep(0.0, 255.0, distance(worldPos, uPhotosPosition)),
-    smoothstep(0.0, 255.0, distance(worldPos, uMusicPosition)),
-    smoothstep(0.0, 255.0, distance(worldPos, uCodePosition))
+    smoothstep(0.0, 255.0, distance(worldPos, uCyanPosition)),
+    smoothstep(0.0, 255.0, distance(worldPos, uMagentaPosition)),
+    smoothstep(0.0, 255.0, distance(worldPos, uYellowPosition))
   );
 
   vec3 normal = normalize(cross(dFdx(vertPos), dFdy(vertPos)));

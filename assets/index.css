@@ -1,44 +1,4 @@
-/* integrate with webpack build */
 body {
     margin: 0;
     padding: 0;
-    background-color: #272727;
-    color: #D7D7D7;
-}
-
-.content {
-    display: none;
-}
-
-.menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-    max-width: 300px;
-
-    max-height: 0px;
-    padding: 0px;
-    transition: max-height 0.15s linear 0.15s, padding 0.15s linear 0.15s;
-
-    background-color: #272727;
-    color: #D7D7D7;
-    font-family: 'Inconsolata';
-}
-
-.menu p {
-    opacity: 0;
-    margin: 0;
-    transition: opacity 0.15s;
-}
-
-.open {
-    max-height: 100rem;
-    padding: 10px;
-    transition: max-height 0.15s, padding 0.15s;
-}
-
-.open p {
-    opacity: 1;
-    transition: opacity 0.15s linear 0.15s;
 }

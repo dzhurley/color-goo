@@ -3,7 +3,7 @@ import './forks/MarchingCubes';
 
 import { points, scene } from './three';
 import params from './gui';
-import { photos, music, code } from './meshes';
+import { cyan, magenta, yellow } from './meshes';
 
 import vertexShader from './vertex.glsl';
 import fragmentShader from './fragment.glsl';
@@ -12,9 +12,9 @@ const uniforms = {
     uLightPosition0: { value: points[0].position },
     uLightPosition1: { value: points[1].position },
     uLightPosition2: { value: points[2].position },
-    uPhotosPosition: { value: photos.position },
-    uMusicPosition: { value: music.position },
-    uCodePosition: { value: code.position },
+    uCyanPosition: { value: cyan.position },
+    uMagentaPosition: { value: magenta.position },
+    uYellowPosition: { value: yellow.position },
 };
 
 const marchMaterial = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
@@ -47,8 +47,8 @@ export default {
     object: march,
     animate: time => {
         march.reset();
-        updatePosition(photos, 0, time);
-        updatePosition(music, 1, time);
-        updatePosition(code, 2, time);
+        updatePosition(cyan, 0, time);
+        updatePosition(magenta, 1, time);
+        updatePosition(yellow, 2, time);
     }
 };
