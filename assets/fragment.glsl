@@ -9,6 +9,8 @@ varying vec3 lightDir2;
 varying vec3 vertPos;
 varying vec3 worldPos;
 
+varying vec3 normalInterp;
+
 const vec3 specColor = vec3(1.0, 1.0, 1.0);
 const float shininess = 30.0;
 const float screenGamma = 2.2; // Assume the monitor is calibrated to the sRGB color space
@@ -34,7 +36,7 @@ void main() {
     smoothstep(0.0, 255.0, distance(worldPos, uYellowPosition))
   );
 
-  vec3 normal = normalize(cross(dFdx(vertPos), dFdy(vertPos)));
+  vec3 normal = normalize(normalInterp);
   vec3 l0 = calcLight(lightDir0, diffuseColor, normal);
   vec3 l1 = calcLight(lightDir1, diffuseColor, normal);
   vec3 l2 = calcLight(lightDir2, diffuseColor, normal);

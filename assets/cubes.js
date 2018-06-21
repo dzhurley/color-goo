@@ -20,7 +20,7 @@ const uniforms = {
 const marchMaterial = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
 marchMaterial.extensions.derivatives = true;
 
-const march = new THREE.MarchingCubes(34, marchMaterial, true, true);
+const march = new THREE.MarchingCubes(42, marchMaterial, true, true);
 march.name = 'march';
 march.isolation = 60;
 march.position.set(0, 0, 0);
