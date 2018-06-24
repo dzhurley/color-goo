@@ -1,11 +1,12 @@
 {
-  "name": "experiments",
-  "version": "0.0.0",
+  "name": "color-goo",
+  "version": "1.0.0",
   "author": "Derek Hurley <dzhurley@gmail.com>",
   "license": "MIT",
   "scripts": {
     "lint": "eslint assets/*.js",
     "start": "webpack-dev-server --inline -d --progress --colors",
+    "start-ssl": "webpack-dev-server --https --cert=$LOCALHOST_CERT --key=$LOCALHOST_KEY --inline -d --progress --colors",
     "build": "webpack -p"
   },
   "dependencies": {
